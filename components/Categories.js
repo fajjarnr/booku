@@ -54,15 +54,12 @@ const category = [
 export default function Categories() {
   return (
     <section className="2xl:px-20 md:px-10 2xl:mx-auto 2xl:container overflow-x-hidden">
-      <div class="md:py-12 py-8 px-4">
-        <div class="flex items-center justify-center mt-10">
-          <div class="lg:px-8 grid grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 gap-6 w-full">
+      <div className="md:py-12 py-8 px-4">
+        <div className="flex items-center justify-center mt-10">
+          <div className="lg:px-8 grid grid-cols-4 lg:grid-cols-8 xl:grid-cols-8 gap-6 w-full">
             {category.map(({ id, imageUrl, title }) => (
-              <Link href={`/promo/`}>
-                <a
-                  key={id}
-                  class="md:w-48 w-full h-32 text-center flex flex-col items-center justify-center"
-                >
+              <Link key={id} href={`/promo/`}>
+                <a className="md:w-48 w-full h-32 text-center flex flex-col items-center justify-center">
                   <img src={imageUrl} alt={title} className="object-contain" />
                   <p className="font-semibold mt-3">{title}</p>
                 </a>

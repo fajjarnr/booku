@@ -83,42 +83,27 @@ export default function Footer() {
                 </h2>
                 <div className="mt-6 flex flex justify-start items-start flex-col space-y-2">
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       About Us
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Blog
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Contact us
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Pricing
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Testimonials
                     </a>
                   </div>
@@ -130,42 +115,27 @@ export default function Footer() {
                 </h2>
                 <div className="mt-6 flex flex justify-start items-start flex-col space-y-2">
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Help center
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Terms of service
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Legal
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Privacy policy
                     </a>
                   </div>
                   <div>
-                    <a
-                      href="javascript:void(0)"
-                      className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed"
-                    >
+                    <a className="text-gray-800 dark:text-white focus:outline-none focus:opacity-75 hover:opacity-75 text-sm md:text-base leading-relaxed">
                       Status
                     </a>
                   </div>
