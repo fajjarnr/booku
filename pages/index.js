@@ -1,23 +1,20 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import Link from 'next/link'
-import { startClock } from '../actions'
-import Examples from '../components/examples'
+import Layout from '../components/Layout';
+import CTA from '../components/CTA';
+import Blog from '../components/Blog';
+import CloudLogo from '../components/CloudLogo';
+import ProductList from '../components/ProductList';
+import Banner from '../components/Banner';
+import Categories from '../components/Categories';
 
-const Index = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(startClock())
-  }, [dispatch])
-
+export default function Home() {
   return (
-    <>
-      <Examples />
-      <Link href="/show-redux-state">
-        <a>Click to see current Redux State</a>
-      </Link>
-    </>
-  )
+    <Layout>
+      <Banner />
+      <Categories />
+      <ProductList />
+      <CloudLogo />
+      {/* <Blog /> */}
+      <CTA />
+    </Layout>
+  );
 }
-
-export default Index
