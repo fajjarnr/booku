@@ -31,7 +31,7 @@ const data = {
       isbn: 9786024526986,
       publisher: 'Gramedia Widiasarana Indonesia',
       language: 'Bahasa Indonesia',
-      releaseDate: new Date('2005-02-25'),
+      releaseDate: '2005-02-25',
       weight: 35,
       large: 14,
       long: 21,
@@ -53,7 +53,7 @@ const data = {
       isbn: 9786020633176,
       publisher: 'Gramedia Widiasarana Indonesia',
       language: 'Bahasa Indonesia',
-      releaseDate: new Date('2005-02-25'),
+      releaseDate: '2005-02-25',
       weight: 0.35,
       largae: 14,
       long: 21,
@@ -75,12 +75,23 @@ const data = {
       isbn: 9786024526986,
       publisher: 'Gramedia Widiasarana Indonesia',
       language: 'Bahasa Indonesia',
-      releaseDate: new Date('2005-02-25'),
+      releaseDate: '2005-02-25',
       weight: 0.35,
       largae: 14,
       long: 21,
       description:
         'Berani Tidak Disukai, yang sudah terjual lebih dari 3,5 juta eksemplar, mengungkap rahasia mengeluarkan kekuatan terpendam yang memungkinkan Anda meraih kebahagiaan yang hakiki dan menjadi sosok yang Anda idam-idamkan.',
+    },
+  ],
+  banners: [
+    {
+      image: '/images/bookfair.png',
+    },
+    {
+      image: '/images/kolonirumah.png',
+    },
+    {
+      image: '/images/melangkah.png',
     },
   ],
 };

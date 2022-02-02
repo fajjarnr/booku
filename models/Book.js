@@ -30,7 +30,7 @@ const booksSchema = new mongoose.Schema(
     isbn: { type: Number, required: true, default: 0 },
     publisher: { type: String, required: true },
     language: { type: String, required: true },
-    releaseDate: { type: Date, required: true },
+    releaseDate: { type: String, required: true },
     weight: { type: Number },
     large: { type: Number },
     long: { type: Number },
