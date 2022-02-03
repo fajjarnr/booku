@@ -4,13 +4,9 @@ import CloudLogo from '../components/CloudLogo';
 import CTA from '../components/CTA';
 import Layout from '../components/Layout';
 import ProductList from '../components/ProductList';
-import { getAllBooks } from '../store/actions/book';
-import { bindActionCreators } from 'redux';
-import { wrapper } from '../store';
-import { connect } from 'react-redux';
-import Book from '../models/Book';
+import db from '../config/db';
 import Banners from '../models/Banner';
-import db from '../config/dbConnect';
+import Book from '../models/Book';
 
 export default function Home({ book, banner }) {
   return (

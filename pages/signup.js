@@ -1,28 +1,59 @@
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
+import { getError } from '../config/error';
+import { Store } from '../context/Store';
+import useForm from '../hooks/useForm';
 
 export default function SignUp() {
-  let form = useRef(null);
+  const router = useRouter();
+  const { redirect } = router.query;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
 
-    const form_data = new FormData(form.current);
-    let payload = {};
+  const [{ name, email, password, confirmPassword }, setState] = useForm({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
-    form_data.forEach(function (value, key) {
-      payload[key] = value;
-    });
+  useEffect(() => {
+    if (userInfo) {
+      router.push('/');
+    }
+  }, []);
 
-    console.log('payload', payload);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post('/api/users/signup', {
+        name,
+        email,
+        password,
+      });
+
+      dispatch({ type: 'USER_LOGIN', payload: data });
+
+      Cookies.set('userInfo', JSON.stringify(data));
+
+      router.push(redirect || '/');
+
+      console.log('data :>> ', data);
+    } catch (err) {
+      getError(err);
+    }
   };
 
   return (
     <section className="bg-white {-- h-screen --}">
       <div className="mx-auto flex justify-center h-full flex-col lg:flex-row">
         <form
-          ref={form}
-          onSubmit={handleSubmit}
+          onSubmit={submitHandler}
           className="w-full lg:w-1/2 flex justify-center bg-white dark:bg-gray-900"
         >
           <div className="w-full sm:w-4/6 md:w-3/6 lg:w-2/3 text-gray-800 dark:text-gray-100 mb-12 sm:mb-0 flex flex-col justify-center px-2 sm:px-0">
@@ -48,6 +79,23 @@ export default function SignUp() {
             <div className="mt-8 w-full px-2 sm:px-6">
               <div className="flex flex-col mt-8">
                 <label
+                  htmlFor="name"
+                  className="text-lg font-semibold leading-tight"
+                >
+                  Name
+                </label>
+                <input
+                  required
+                  id="name"
+                  name="name"
+                  className="h-10 px-2 w-full rounded mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 border-gray-300 border shadow"
+                  type="name"
+                  value={name}
+                  onChange={setState}
+                />
+              </div>
+              <div className="flex flex-col mt-8">
+                <label
                   htmlFor="email"
                   className="text-lg font-semibold leading-tight"
                 >
@@ -59,6 +107,8 @@ export default function SignUp() {
                   name="email"
                   className="h-10 px-2 w-full rounded mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 border-gray-300 border shadow"
                   type="email"
+                  value={email}
+                  onChange={setState}
                 />
               </div>
               <div className="flex flex-col mt-5">
@@ -74,6 +124,8 @@ export default function SignUp() {
                   name="password"
                   className="h-10 px-2 w-full rounded mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 border-gray-300 border shadow"
                   type="password"
+                  value={password}
+                  onChange={setState}
                 />
               </div>
               <div className="flex flex-col mt-5">
@@ -89,6 +141,8 @@ export default function SignUp() {
                   name="confirmPassword"
                   className="h-10 px-2 w-full rounded mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 border-gray-300 border shadow"
                   type="password"
+                  value={confirmPassword}
+                  onChange={setState}
                 />
               </div>
             </div>

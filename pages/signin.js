@@ -1,28 +1,56 @@
-import { useRef } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
+import { getError } from '../config/error';
+import { Store } from '../context/Store';
+import useForm from '../hooks/useForm';
 
 export default function SignIn() {
-  let form = useRef(null);
+  const router = useRouter();
+  const { redirect } = router.query;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
 
-    const form_data = new FormData(form.current);
-    let payload = {};
+  const [{ email, password }, setState] = useForm({
+    email: '',
+    password: '',
+  });
 
-    form_data.forEach(function (value, key) {
-      payload[key] = value;
-    });
+  useEffect(() => {
+    if (userInfo) {
+      router.push('/');
+    }
+  }, []);
 
-    console.log('payload', payload);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post('/api/users/signin', {
+        email,
+        password,
+      });
+
+      dispatch({ type: 'USER_LOGIN', payload: data });
+
+      Cookies.set('userInfo', JSON.stringify(data));
+
+      router.push(redirect || '/');
+
+      console.log('data :>> ', data);
+    } catch (err) {
+      getError(err);
+    }
   };
 
   return (
     <section className="bg-white {-- h-screen --}">
       <div className="mx-auto flex justify-center h-full flex-col lg:flex-row">
         <form
-          ref={form}
-          onSubmit={handleSubmit}
+          onSubmit={submitHandler}
           className="w-full lg:w-1/2 flex justify-center bg-white dark:bg-gray-900"
         >
           <div className="w-full sm:w-4/6 md:w-3/6 lg:w-2/3 text-gray-800 dark:text-gray-100 mb-12 sm:mb-0 flex flex-col justify-center px-2 sm:px-0">
@@ -59,6 +87,8 @@ export default function SignIn() {
                   name="email"
                   className="h-10 px-2 w-full rounded mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 border-gray-300 border shadow"
                   type="email"
+                  value={email}
+                  onChange={setState}
                 />
               </div>
               <div className="flex flex-col mt-5">
@@ -74,6 +104,8 @@ export default function SignIn() {
                   name="password"
                   className="h-10 px-2 w-full rounded mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 border-gray-300 border shadow"
                   type="password"
+                  value={password}
+                  onChange={setState}
                 />
               </div>
             </div>
@@ -102,7 +134,7 @@ export default function SignIn() {
               </button>
               <p className="mt-6 text-xs">
                 Don’t Have An Account?{' '}
-                <Link href="/signup">
+                <Link href={`/signup?redirect=${redirect || '/'}`} passHref>
                   <a className="underline text-indigo-600">Sign Up</a>
                 </Link>
               </p>
