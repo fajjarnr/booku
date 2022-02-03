@@ -24,18 +24,6 @@ export default function Home({ book, banner }) {
   );
 }
 
-// export const getServerSideProps = wrapper.getServerSideProps((store) => () => {
-//   store.dispatch(getAllBooks());
-// });
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     getAllBooks: bindActionCreators(getAllBooks(), dispatch),
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(Home);
-
 export async function getServerSideProps() {
   db.connect();
 

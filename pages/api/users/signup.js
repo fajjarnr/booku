@@ -1,11 +1,11 @@
 import nc from 'next-connect';
 import db from '../../../config/db';
-import { getAllBanner } from '../../../controllers/bannerController';
+import { signUp } from '../../../controllers/userController';
 
 const handler = nc();
 
 db.connect();
 
-handler.get(getAllBanner);
+handler.post(signUp);
 
 export default handler;

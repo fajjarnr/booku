@@ -124,7 +124,7 @@ export default function Navbar() {
                   onClick={() => setProfile(!profile)}
                 >
                   {profile && (
-                    <ul className="p-2 w-40 border-r bg-white absolute rounded shadow mt-16 top-0 ">
+                    <ul className="z-50 p-2 w-40 border-r bg-white absolute rounded shadow mt-16 top-0 ">
                       <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                         <div className="flex items-center">
                           <svg
@@ -259,7 +259,7 @@ export default function Navbar() {
                       onClick={() => setProfile(!profile)}
                     >
                       {profile && (
-                        <ul className="p-2 w-40 border-r bg-white absolute rounded shadow mt-16 top-0">
+                        <ul className="z-50 p-2 w-40 border-r bg-white absolute rounded shadow mt-16 top-0">
                           <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                             <div className="flex items-center">
                               <svg

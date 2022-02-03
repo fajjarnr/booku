@@ -1,11 +1,11 @@
 import nc from 'next-connect';
 import db from '../../../config/db';
-import { getAllBanner } from '../../../controllers/bannerController';
+import { getBook } from '../../../controllers/bookController';
 
 const handler = nc();
 
 db.connect();
 
-handler.get(getAllBanner);
+handler.get(getBook);
 
 export default handler;

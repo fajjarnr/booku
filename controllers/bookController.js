@@ -23,3 +23,15 @@ export const createBook = async (req, res) => {
     });
   }
 };
+
+export const getBook = async (req, res) => {
+  try {
+    const { id } = req.query;
+    const book = await Book.findById(id);
+    return res.status(200).json({ message: 'success', data: book });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+};

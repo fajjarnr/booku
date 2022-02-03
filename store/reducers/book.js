@@ -1,7 +1,7 @@
 import { GET_ALL_BOOKS, ALL_BOOKS_FAIL, CLEAR_ERROR } from '../types';
 
 const initialState = {
-  book: [],
+  book: null,
 };
 
 export const bookReducers = (state = initialState, action) => {
@@ -9,11 +9,11 @@ export const bookReducers = (state = initialState, action) => {
     case GET_ALL_BOOKS:
       return {
         ...state,
-        book: action.payload.book,
+        book: action.payload,
       };
     case ALL_BOOKS_FAIL:
       return {
-        error: payload,
+        error: action.payload,
       };
     case CLEAR_ERROR:
       return {

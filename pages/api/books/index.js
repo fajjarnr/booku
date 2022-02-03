@@ -1,5 +1,5 @@
 import nc from 'next-connect';
-import db from '../../../config/dbConnect';
+import db from '../../../config/db';
 import { getAllBook, createBook } from '../../../controllers/bookController';
 
 const handler = nc();
