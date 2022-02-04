@@ -1,4 +1,6 @@
+import Cookies from 'js-cookie';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Store } from '../context/Store';
 
@@ -8,6 +10,17 @@ export default function Navbar() {
 
   const { state, dispatch } = useContext(Store);
   const { cart, userInfo } = state;
+
+  const router = useRouter();
+
+  const logoutClickHandler = () => {
+    dispatch({ type: 'USER_LOGOUT' });
+    Cookies.remove('userInfo');
+    Cookies.remove('cartItems');
+    Cookies.remove('shippinhAddress');
+    Cookies.remove('paymentMethod');
+    router.push('/');
+  };
 
   return (
     <header className="h-full w-full">
@@ -96,34 +109,49 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="h-full flex items-center">
-                <button
-                  aria-label="show notifications"
-                  className="relative focus:outline-none focus:text-indigo-700 hover:text-indigo-700 focus:border-indigo-700 hover:border-indigo-700 mx-5 h-full flex items-center justify-center text-gray-600 cursor-pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-bell"
-                    width={28}
-                    height={28}
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                <Link href="/cart" passHref>
+                  <a
+                    aria-label="show cart"
+                    className="relative focus:outline-none focus:text-indigo-700 hover:text-indigo-700 focus:border-indigo-700 hover:border-indigo-700 mx-5 h-full flex items-center justify-center text-gray-600 cursor-pointer"
                   >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                    <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                  </svg>
-                  <div className="absolute top-0 left-4 mt-0 mr-4 pr-1 pt-1">
-                    <div className="animate-ping w-2 h-2 rounded-full bg-blue-400" />
-                  </div>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-user"
+                      width={28}
+                      height={28}
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                      />
+                    </svg>
+                    {cart.cartItems.length > 0 ? (
+                      <div className="absolute top-0 left-7 -mt-2 mr-4 pr-1 pt-1 font-bold">
+                        {cart.cartItems.length}
+                      </div>
+                    ) : (
+                      <div className="absolute top-0 left-4 mt-0 mr-4 pr-1 pt-1">
+                        <div className="animate-ping w-2 h-2 rounded-full bg-blue-400" />
+                      </div>
+                    )}
+                  </a>
+                </Link>
               </div>
               <div className="h-full flex items-center">
-                {userInfo ? (
-                  <p>Masuk</p>
+                {!userInfo ? (
+                  <Link href="/signin">
+                    <a className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                      Masuk
+                    </a>
+                  </Link>
                 ) : (
                   <button
                     aria-label="dropdown"
@@ -156,7 +184,7 @@ export default function Navbar() {
                         <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-help"
+                            className="icon icon-tabler icon-tabler-user"
                             width={20}
                             height={20}
                             viewBox="0 0 24 24"
@@ -166,14 +194,40 @@ export default function Navbar() {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <circle cx={12} cy={12} r={9} />
-                            <line x1={12} y1={17} x2={12} y2="17.01" />
-                            <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                            />
                           </svg>
-                          <span className="ml-2">Help Center</span>
+                          <span className="ml-2">Order History</span>
                         </li>
-                        <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                        {userInfo.isAdmin && (
+                          <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-settings"
+                              width={20}
+                              height={20}
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" />
+                              <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            <span className="ml-2">Admin Dashboard</span>
+                          </li>
+                        )}
+                        <li
+                          onClick={logoutClickHandler}
+                          className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-settings"
@@ -186,11 +240,14 @@ export default function Navbar() {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                           >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <circle cx={12} cy={12} r={3} />
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                            />
                           </svg>
-                          <span className="ml-2">Account Settings</span>
+                          <span className="ml-2">Sign Out</span>
                         </li>
                       </ul>
                     )}
@@ -235,41 +292,79 @@ export default function Navbar() {
               <div className="flex md:hidden items-center justify-end">
                 <div className="flex items-center">
                   <div className="h-full flex items-center">
-                    <button
-                      aria-label="show notifications"
-                      className="relative focus:outline-none focus:text-indigo-700 hover:text-indigo-700 focus:border-indigo-700 hover:border-indigo-700 h-full flex items-center justify-center text-gray-600 cursor-pointer"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-bell"
-                        width={28}
-                        height={28}
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                    <Link href="/cart" passHref>
+                      <a
+                        aria-label="show cart"
+                        className="relative focus:outline-none focus:text-indigo-700 hover:text-indigo-700 focus:border-indigo-700 hover:border-indigo-700 mx-5 h-full flex items-center justify-center text-gray-600 cursor-pointer"
                       >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-                        <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-                      </svg>
-                      <div className="absolute top-0 left-4 mt-0 mr-4 pr-1 pt-1">
-                        <div className="animate-ping w-2 h-2 rounded-full bg-blue-400" />
-                      </div>
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-user"
+                          width={28}
+                          height={28}
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                          />
+                        </svg>
+                        {cart.cartItems.length > 0 ? (
+                          <div className="absolute top-0 left-7 -mt-2 mr-4 pr-1 pt-1 font-bold">
+                            {cart.cartItems.length}
+                          </div>
+                        ) : (
+                          <div className="absolute top-0 left-4 mt-0 mr-4 pr-1 pt-1">
+                            <div className="animate-ping w-2 h-2 rounded-full bg-blue-400" />
+                          </div>
+                        )}
+                      </a>
+                    </Link>
                   </div>
                   <div className="h-full flex items-center">
-                    <button
-                      aria-label="dropdown"
-                      className="focus:outline-none mx-4 focus:text-gray-900 text-gray-800 border-b-2 border-transparent focus:border-gray-800 hover:text-gray-900 w-full flex items-center justify-end relative cursor-pointer"
-                      onClick={() => setProfile(!profile)}
-                    >
-                      {profile && (
-                        <ul className="z-50 p-2 w-40 border-r bg-white absolute rounded shadow mt-16 top-0">
-                          <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                            <div className="flex items-center">
+                    {!userInfo ? (
+                      <Link href="/signin">
+                        <a className="inline-flex items-center justify-center px-5 py-3 mx-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                          Masuk
+                        </a>
+                      </Link>
+                    ) : (
+                      <button
+                        aria-label="dropdown"
+                        className="mx-2 focus:outline-none focus:text-gray-900 text-gray-800 border-b-2 border-transparent focus:border-gray-800 hover:text-gray-900 w-full flex items-center justify-end relative cursor-pointer"
+                        onClick={() => setProfile(!profile)}
+                      >
+                        {profile && (
+                          <ul className="z-50 p-2 w-40 border-r bg-white absolute rounded shadow mt-16 top-0 ">
+                            <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                              <div className="flex items-center">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="icon icon-tabler icon-tabler-user"
+                                  width={20}
+                                  height={20}
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path stroke="none" d="M0 0h24v24H0z" />
+                                  <circle cx={12} cy={7} r={4} />
+                                  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                </svg>
+                                <span className="ml-2">My Profile</span>
+                              </div>
+                            </li>
+                            <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="icon icon-tabler icon-tabler-user"
@@ -282,64 +377,70 @@ export default function Navbar() {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                               >
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <circle cx={12} cy={7} r={4} />
-                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                />
                               </svg>
-                              <span className="ml-2">My Profile</span>
-                            </div>
-                          </li>
-                          <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-help"
-                              width={20}
-                              height={20}
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
+                              <span className="ml-2">Order History</span>
+                            </li>
+                            {userInfo.isAdmin && (
+                              <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="icon icon-tabler icon-tabler-settings"
+                                  width={20}
+                                  height={20}
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path stroke="none" d="M0 0h24v24H0z" />
+                                  <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                  <circle cx={12} cy={12} r={3} />
+                                </svg>
+                                <span className="ml-2">Admin Dashboard</span>
+                              </li>
+                            )}
+                            <li
+                              onClick={logoutClickHandler}
+                              className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none"
                             >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <circle cx={12} cy={12} r={9} />
-                              <line x1={12} y1={17} x2={12} y2="17.01" />
-                              <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-                            </svg>
-                            <span className="ml-2">Help Center</span>
-                          </li>
-                          <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-settings"
-                              width={20}
-                              height={20}
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                              <circle cx={12} cy={12} r={3} />
-                            </svg>
-                            <span className="ml-2">Account Settings</span>
-                          </li>
-                        </ul>
-                      )}
-                      {userInfo ? (
-                        <p>Masuk</p>
-                      ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon icon-tabler icon-tabler-settings"
+                                width={20}
+                                height={20}
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                                />
+                              </svg>
+                              <span className="ml-2">Sign Out</span>
+                            </li>
+                          </ul>
+                        )}
                         <img
                           className="rounded-full h-10 w-10 object-cover"
                           src="https://i.ibb.co/GTLTzZY/Unsplash-Avatars-0000s-0035-azamat-zhanisov-a5s-RFie-A3-BY-unsplash-1.png"
                           alt="Unsplash-Avatars-0000s-0035-azamat-zhanisov-a5s-RFie-A3-BY-unsplash-1"
                         />
-                      )}
-                    </button>
+                      </button>
+                    )}
                   </div>
                   <div className="h-full flex items-center">
                     <button
