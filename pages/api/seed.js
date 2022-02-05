@@ -1,6 +1,6 @@
 import nc from 'next-connect';
 import Book from '../../models/Book';
-import db from '../../config/dbConnect';
+import db from '../../config/db';
 import seed from '../../utils/seed';
 import User from '../../models/User';
 import Banner from '../../models/Banner';
@@ -15,6 +15,7 @@ handler.get(async (req, res) => {
   await Book.insertMany(seed.books);
   await Banner.deleteMany();
   await Banner.insertMany(seed.banners);
+  await db.disconnect();
   res.send({ message: 'seeded successfully' });
 });
 
