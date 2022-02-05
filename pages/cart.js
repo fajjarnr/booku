@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import Layout from '../components/Layout';
 import { Store } from '../context/Store';
 import { formatter } from '../utils/formatter';
+import { initiateCheckout } from '../controllers/paymentController';
 
 function CartScreen() {
   const { state, dispatch } = useContext(Store);
@@ -29,9 +30,16 @@ function CartScreen() {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
 
-  const checkoutHandler = () => {
-    router.push('/checkout');
-  };
+  function checkoutHandler() {
+    initiateCheckout({
+      lineItems: cartItems.map((item) => {
+        return {
+          price: item._id,
+          quantity: item.quantity,
+        };
+      }),
+    });
+  }
 
   return (
     <Layout>
@@ -44,7 +52,7 @@ function CartScreen() {
             no item in cart
           </p>
         ) : (
-          <form className="mt-12 lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start xl:gap-x-16">
+          <div className="mt-12 lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start xl:gap-x-16">
             <section aria-labelledby="cart-heading" className="lg:col-span-7">
               <h2 id="cart-heading" className="sr-only">
                 Items in your shopping cart
@@ -178,7 +186,7 @@ function CartScreen() {
                 </button>
               </div>
             </section>
-          </form>
+          </div>
         )}
       </div>
     </Layout>
