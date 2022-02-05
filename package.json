@@ -8,6 +8,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@heroicons/react": "^1.0.5",
+    "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.28.1",
