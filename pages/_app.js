@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { StoreProvider } from '../context/Store';
 
 import 'swiper/css/bundle';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }) => {
