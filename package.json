@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.25.0",
