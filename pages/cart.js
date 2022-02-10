@@ -1,12 +1,12 @@
 import { CheckIcon, ClockIcon, XIcon } from '@heroicons/react/solid';
+import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { Store } from '../context/Store';
 import { formatter } from '../utils/formatter';
-import { initiateCheckout } from '../controllers/paymentController';
 
 function CartScreen() {
   const { state, dispatch } = useContext(Store);
@@ -30,16 +30,25 @@ function CartScreen() {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
 
-  function checkoutHandler() {
-    initiateCheckout({
-      lineItems: cartItems.map((item) => {
-        return {
-          price: item._id,
-          quantity: item.quantity,
-        };
-      }),
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  );
+
+  const createCheckOutSession = async () => {
+    const stripe = await stripePromise;
+
+    const checkoutSession = await axios.post('/api/payment', {
+      cart: cartItems,
     });
-  }
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+
+    if (result.error) {
+      alert(result.error.message);
+    }
+  };
 
   return (
     <Layout>
@@ -180,7 +189,8 @@ function CartScreen() {
                 <button
                   type="submit"
                   className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                  onClick={checkoutHandler}
+                  disabled={cartItems.quantity === 0}
+                  onClick={createCheckOutSession}
                 >
                   Checkout
                 </button>

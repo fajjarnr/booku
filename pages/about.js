@@ -31,8 +31,8 @@ export default function About() {
                     d="M31 16V32L44 24L31 16Z"
                     fill="white"
                     stroke="white"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </div>
