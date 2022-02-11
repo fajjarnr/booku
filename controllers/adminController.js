@@ -20,8 +20,18 @@ export const summary = async (req, res) => {
 export const users = async (req, res) => {
   try {
     const users = await User.find({});
+    return res.status(200).json({ message: 'success', data: users });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+};
 
-    res.send({ users });
+export const books = async (req, res) => {
+  try {
+    const books = await Book.find({});
+    return res.status(200).json({ message: 'success', data: books });
   } catch (error) {
     return res.status(400).json({
       error: error.message,

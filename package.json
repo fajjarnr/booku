@@ -29,6 +29,7 @@
     "redux-thunk": "^2.3.0",
     "slugify": "^1.6.5",
     "stripe": "^8.202.0",
+    "sweetalert": "^2.1.2",
     "swiper": "^8.0.1"
   },
   "devDependencies": {

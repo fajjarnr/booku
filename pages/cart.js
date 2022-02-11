@@ -13,6 +13,7 @@ function CartScreen() {
 
   const {
     cart: { cartItems },
+    userInfo,
   } = state;
 
   const router = useRouter();
@@ -35,18 +36,22 @@ function CartScreen() {
   );
 
   const createCheckOutSession = async () => {
-    const stripe = await stripePromise;
+    if (!userInfo) {
+      router.push('/signin');
+    } else {
+      const stripe = await stripePromise;
 
-    const checkoutSession = await axios.post('/api/payment', {
-      cart: cartItems,
-    });
+      const checkoutSession = await axios.post('/api/payment', {
+        cart: cartItems,
+      });
 
-    const result = await stripe.redirectToCheckout({
-      sessionId: checkoutSession.data.id,
-    });
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.id,
+      });
 
-    if (result.error) {
-      alert(result.error.message);
+      if (result.error) {
+        alert(result.error.message);
+      }
     }
   };
 
@@ -189,7 +194,6 @@ function CartScreen() {
                 <button
                   type="submit"
                   className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                  disabled={cartItems.quantity === 0}
                   onClick={createCheckOutSession}
                 >
                   Checkout

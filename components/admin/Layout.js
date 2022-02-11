@@ -23,8 +23,6 @@ const navigation = [
   },
   { name: 'Book', href: '/admin/books', icon: FolderIcon, current: false },
   { name: 'User', href: '/admin/users', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
 ];
 
 const userNavigation = [
