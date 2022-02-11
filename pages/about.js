@@ -3,16 +3,16 @@ import Layout from '../components/Layout';
 export default function About() {
   return (
     <Layout>
-      <div class="overflow-y-hidden">
-        <div class="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-          <div class="relative">
-            <div class="absolute top-0 left-0 w-full h-full">
-              <div class="w-full h-full flex flex-col justify-center items-center bg-indigo-700 bg-opacity-20 text-white sm:px-12 px-6 rounded-md">
-                <h2 class="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7">
+      <div classNameName="overflow-y-hidden">
+        <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
+          <div className="relative">
+            <div className="absolute top-0 left-0 w-full h-full">
+              <div className="w-full h-full flex flex-col justify-center items-center bg-indigo-700 bg-opacity-20 text-white sm:px-12 px-6 rounded-md">
+                <h2 className="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7">
                   Discover about us
                 </h2>
                 <svg
-                  class="mt-8 cursor-pointer hover:bg-gray-200 hover:bg-opacity-20 rounded-md"
+                  className="mt-8 cursor-pointer hover:bg-gray-200 hover:bg-opacity-20 rounded-md"
                   width="72"
                   height="48"
                   viewBox="0 0 72 48"
@@ -39,30 +39,30 @@ export default function About() {
             </div>
             <div>
               <img
-                class="rounded-md lg:block hidden w-full"
+                className="rounded-md lg:block hidden w-full"
                 src="https://i.ibb.co/17q26WL/qw.png"
                 alt="A person Coding"
               />
               <img
-                class="rounded-md lg:hidden sm:block hidden w-full"
+                className="rounded-md lg:hidden sm:block hidden w-full"
                 src="https://i.ibb.co/pZX8cKM/Rectangle-122-1.png"
                 alt="A person Coding"
               />
               <img
-                class="rounded-md sm:hidden block w-full"
+                className="rounded-md sm:hidden block w-full"
                 src="https://i.ibb.co/b3YLqxC/Rectangle-122.png"
                 alt="A person Coding"
               />
             </div>
           </div>
 
-          <div class="lg:mt-14 sm:mt-7 mt-14">
-            <div class="flex lg:flex-row flex-col items-center">
-              <div class="w-full lg:w-7/12">
-                <h2 class="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800">
+          <div className="lg:mt-14 sm:mt-7 mt-14">
+            <div className="flex lg:flex-row flex-col items-center">
+              <div className="w-full lg:w-7/12">
+                <h2 className="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800">
                   Our Story
                 </h2>
-                <p class="pr-6 font-normal text-base leading-6 text-gray-600 mt-6 w-full xl:w-9/12">
+                <p className="pr-6 font-normal text-base leading-6 text-gray-600 mt-6 w-full xl:w-9/12">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                   The point of using Lorem Ipsum.In the first place we have
@@ -72,7 +72,7 @@ export default function About() {
                   inviolate; and we will that it be thus observed; which is
                   apparent from
                 </p>
-                <p class="pr-6 font-normal text-base leading-6 text-gray-600 w-full xl:w-9/12 mt-6">
+                <p className="pr-6 font-normal text-base leading-6 text-gray-600 w-full xl:w-9/12 mt-6">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                   The point of using Lorem Ipsum.In the first place we have
@@ -83,19 +83,19 @@ export default function About() {
                   apparent from
                 </p>
               </div>
-              <div class="lg:pt-16 xl:pt-0 cursor-pointer w-full lg:w-5/12 lg:mt-0 sm:mt-10 mt-8">
-                <div class="w-full grid sm:grid-cols-2 grid-cols-1">
-                  <div class="pb-5 border-r-2 border-gray-200">
-                    <div class="flex justify-between">
-                      <div class="w-auto">
-                        <h2 class="-mt-2 font-semibold text-xl leading-5 text-gray-800">
+              <div className="lg:pt-16 xl:pt-0 cursor-pointer w-full lg:w-5/12 lg:mt-0 sm:mt-10 mt-8">
+                <div className="w-full grid sm:grid-cols-2 grid-cols-1">
+                  <div className="pb-5 border-r-2 border-gray-200">
+                    <div className="flex justify-between">
+                      <div className="w-auto">
+                        <h2 className="-mt-2 font-semibold text-xl leading-5 text-gray-800">
                           Company founded
                         </h2>
-                        <p class="font-normal text-base leading-6 text-gray-600 mt-2">
+                        <p className="font-normal text-base leading-6 text-gray-600 mt-2">
                           It is a long established in 1988
                         </p>
                       </div>
-                      <div class="-mt-1 -mr-2">
+                      <div className="-mt-1 -mr-2">
                         <svg
                           width="60"
                           height="12"
@@ -146,17 +146,17 @@ export default function About() {
                   </div>
                   <div></div>
 
-                  <div class="sm:hidden block pb-5 border-r-2 border-gray-200">
-                    <div class="flex justify-between">
-                      <div class="w-auto">
-                        <h2 class="font-semibold text-xl leading-5 text-gray-800">
+                  <div className="sm:hidden block pb-5 border-r-2 border-gray-200">
+                    <div className="flex justify-between">
+                      <div className="w-auto">
+                        <h2 className="font-semibold text-xl leading-5 text-gray-800">
                           500k Monthly Users
                         </h2>
-                        <p class="font-normal text-base leading-6 text-gray-600 mt-2">
+                        <p className="font-normal text-base leading-6 text-gray-600 mt-2">
                           It is a long established in 1988
                         </p>
                       </div>
-                      <div class="mt-1 -mr-2">
+                      <div className="mt-1 -mr-2">
                         <svg
                           width="60"
                           height="12"
@@ -206,13 +206,13 @@ export default function About() {
                     </div>
                   </div>
 
-                  <div class="border-r-2 border-gray-200"></div>
+                  <div className="border-r-2 border-gray-200"></div>
 
-                  <div class="sm:block hidden pb-7">
-                    <div class="flex justify-between">
-                      <div class="-mt-1 -ml-2">
+                  <div className="sm:block hidden pb-7">
+                    <div className="flex justify-between">
+                      <div className="-mt-1 -ml-2">
                         <svg
-                          class=""
+                          className=""
                           width="60"
                           height="12"
                           viewBox="0 0 60 12"
@@ -275,11 +275,11 @@ export default function About() {
                           />
                         </svg>
                       </div>
-                      <div class="ml-auto w-auto">
-                        <h2 class="-mt-2 font-semibold text-xl leading-5 text-gray-800">
+                      <div className="ml-auto w-auto">
+                        <h2 className="-mt-2 font-semibold text-xl leading-5 text-gray-800">
                           500k monthly views
                         </h2>
-                        <p class="font-normal text-base leading-6 text-gray-600 mt-2">
+                        <p className="font-normal text-base leading-6 text-gray-600 mt-2">
                           It is a long established in 1988
                         </p>
                       </div>
@@ -288,17 +288,17 @@ export default function About() {
 
                   <div></div>
 
-                  <div class="sm:hidden block pb-5 border-r-2 border-gray-200">
-                    <div class="flex justify-between">
-                      <div class="w-auto">
-                        <h2 class="-mt-2 font-semibold text-xl leading-5 text-gray-800">
+                  <div className="sm:hidden block pb-5 border-r-2 border-gray-200">
+                    <div className="flex justify-between">
+                      <div className="w-auto">
+                        <h2 className="-mt-2 font-semibold text-xl leading-5 text-gray-800">
                           200k Users
                         </h2>
-                        <p class="font-normal text-base leading-6 text-gray-600 mt-2">
+                        <p className="font-normal text-base leading-6 text-gray-600 mt-2">
                           It is a long established in 1988
                         </p>
                       </div>
-                      <div class="-mt-1 -mr-2">
+                      <div className="-mt-1 -mr-2">
                         <svg
                           width="60"
                           height="12"
@@ -350,17 +350,17 @@ export default function About() {
 
                   <div></div>
 
-                  <div class="sm:block hidden pb-5 border-r-2 border-gray-200">
-                    <div class="flex justify-between">
-                      <div class="w-auto">
-                        <h2 class="font-semibold text-xl leading-5 text-gray-800">
+                  <div className="sm:block hidden pb-5 border-r-2 border-gray-200">
+                    <div className="flex justify-between">
+                      <div className="w-auto">
+                        <h2 className="font-semibold text-xl leading-5 text-gray-800">
                           200k Users
                         </h2>
-                        <p class="font-normal text-base leading-6 text-gray-600 mt-2">
+                        <p className="font-normal text-base leading-6 text-gray-600 mt-2">
                           It is a long established in 1988
                         </p>
                       </div>
-                      <div class="mt-1 -mr-2">
+                      <div className="mt-1 -mr-2">
                         <svg
                           width="60"
                           height="12"
@@ -412,17 +412,17 @@ export default function About() {
 
                   <div></div>
 
-                  <div class="sm:hidden block pb-5 border-r-2 border-gray-200">
-                    <div class="flex justify-between">
-                      <div class="w-auto">
-                        <h2 class="font-semibold text-xl leading-5 text-gray-800">
+                  <div className="sm:hidden block pb-5 border-r-2 border-gray-200">
+                    <div className="flex justify-between">
+                      <div className="w-auto">
+                        <h2 className="font-semibold text-xl leading-5 text-gray-800">
                           500k Monthly Users
                         </h2>
-                        <p class="font-normal text-base leading-6 text-gray-600 mt-2">
+                        <p className="font-normal text-base leading-6 text-gray-600 mt-2">
                           It is a long established in 1988
                         </p>
                       </div>
-                      <div class="mt-1 -mr-2">
+                      <div className="mt-1 -mr-2">
                         <svg
                           width="60"
                           height="12"
@@ -472,13 +472,13 @@ export default function About() {
                     </div>
                   </div>
 
-                  <div class=""></div>
+                  <div className=""></div>
 
-                  <div class="sm:block hidden pb-5">
-                    <div class="flex justify-between">
-                      <div class="-mt-1 -ml-2">
+                  <div className="sm:block hidden pb-5">
+                    <div className="flex justify-between">
+                      <div className="-mt-1 -ml-2">
                         <svg
-                          class=""
+                          className=""
                           width="60"
                           height="12"
                           viewBox="0 0 60 12"
@@ -541,11 +541,11 @@ export default function About() {
                           />
                         </svg>
                       </div>
-                      <div class="ml-auto w-auto">
-                        <h2 class="-mt-2 w-auto font-semibold text-xl leading-5 text-gray-800">
+                      <div className="ml-auto w-auto">
+                        <h2 className="-mt-2 w-auto font-semibold text-xl leading-5 text-gray-800">
                           200+ Team
                         </h2>
-                        <p class="w-auto font-normal text-base leading-6 text-gray-600 mt-2">
+                        <p className="w-auto font-normal text-base leading-6 text-gray-600 mt-2">
                           It is a long established in 1988
                         </p>
                       </div>

@@ -1,5 +1,6 @@
 import User from '../models/User';
 import Book from '../models/Book';
+import Banner from '../models/Banner';
 
 export const summary = async (req, res) => {
   try {
@@ -32,6 +33,17 @@ export const books = async (req, res) => {
   try {
     const books = await Book.find({});
     return res.status(200).json({ message: 'success', data: books });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+};
+
+export const banners = async (req, res) => {
+  try {
+    const banners = await Banner.find({});
+    return res.status(200).json({ message: 'success', data: banners });
   } catch (error) {
     return res.status(400).json({
       error: error.message,

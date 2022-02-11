@@ -55,13 +55,19 @@ function Dashboard() {
 
   return (
     <Layout>
-      <div className="grid sm:grid-cols-2">
+      <div className="max-w-7xl mx-auto px-4 pb-4 sm:px-6 md:px-8">
+        <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+      </div>
+      <div className="grid grid-cols-2">
         <div className="bg-yellow-200 px-12 py-12 my-2 mx-2 rounded-lg">
           {summary.booksCount}
         </div>
         <div className="bg-red-200 px-12 py-12 my-2 mx-2 rounded-lg">
           {summary.usersCount}
         </div>
+      </div>
+      <div className="py-4">
+        <div className="border-4 border-dashed border-gray-200 rounded-lg h-96" />
       </div>
     </Layout>
   );

@@ -1,13 +1,11 @@
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
   BellIcon,
+  BookOpenIcon,
   CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
   HomeIcon,
-  InboxIcon,
   MenuAlt2Icon,
-  UsersIcon,
+  UserCircleIcon,
   XIcon,
 } from '@heroicons/react/outline';
 import { SearchIcon } from '@heroicons/react/solid';
@@ -21,8 +19,14 @@ const navigation = [
     icon: HomeIcon,
     current: true,
   },
-  { name: 'Book', href: '/admin/books', icon: FolderIcon, current: false },
-  { name: 'User', href: '/admin/users', icon: CalendarIcon, current: false },
+  {
+    name: 'Banners',
+    href: '/admin/banners',
+    icon: CalendarIcon,
+    current: false,
+  },
+  { name: 'Book', href: '/admin/books', icon: BookOpenIcon, current: false },
+  { name: 'User', href: '/admin/users', icon: UserCircleIcon, current: false },
 ];
 
 const userNavigation = [
